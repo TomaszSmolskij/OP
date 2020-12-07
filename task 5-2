@@ -1,0 +1,12 @@
+#!/bin/bash
+ls
+echo "Choose any text file which you see!"
+#You see the list of all files in this directory -task4 -./task5.2 and you can choose which you need I checked (file2)
+read b
+perl -ne 'print length()."  line $.  $_"' $b | sort -n
+echo " "
+echo "the longest line in $b"
+# Will schow for you which longest line in file which you will choose
+echo " "
+egrep -Em1 "^.{$(wc -L < $b)}\$" $b
+# Show longest line in file
