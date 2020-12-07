@@ -1,0 +1,10 @@
+#!/bin/bash
+ls
+echo "Choose any folder which you see:"
+# Which you see 
+read c
+# Program will read this folde
+cd $c
+ls -d -l .* | awk '{if ($5 != 0) print $9}'
+# This script show the hidden non-empty files comperind 2 folders.
+~                                             
