@@ -1,0 +1,14 @@
+#!/bin/bash
+ls
+echo " "
+echo "Choose file where is a empty lines to  delete them!!!"
+read c
+echo "You see file  before deleting empty lines"
+echo " "
+cat $c
+echo " "
+echo "You see file after deleting"
+echo " "
+#Now all empty lines from the text file are remover!
+sed -i '/^[{:blank:}]*$/ d' $c
+cat $c
