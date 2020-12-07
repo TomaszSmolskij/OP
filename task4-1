@@ -1,0 +1,32 @@
+#!/bin/bash
+for folder in * ; do
+        if [ -d "$folder" ]; then
+                echo "$folder"
+        fi
+done
+max=0
+f=""
+for i in $(find /home/tomasz/task4 -type f)
+# I create files and put whem to folders in my own computer work place 
+do
+        echo $i $(stat -c %s $i)
+        if [ $(stat -c %s $i) -gt $max ]; then
+                f=$i
+        fi
+done
+echo "The biggest: $f"
+# which is the largest
+s=0
+d=""
+for i in $(find * -type d)
+do
+        if [ $s -lt $(ls -f $i | wc -l) ]; then
+                s=$(ls -f $i |wc -l)
+                d=$i
+        fi
+done
+echo "The folder has the most files: $d"
+# Using my task I create files and put them to folders, to check which forler of files are more largest
+# And atfet that I compered them and result you see.
+
+~                                         
