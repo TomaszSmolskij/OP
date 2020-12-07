@@ -1,19 +1,25 @@
 !/bin/bash
 echo "enter the first file"
-
+#I need to write first my own file which I was created before. 
 read a
+#read first file
 echo "enter the second file"
-read b
+# Now I wrote second one file.
+read b 
+#read second file
 count1=$(wc -l < $a)
 #first file count
 count2=$(wc -l < $b)
 if [ $f -gt $d ]
 then
-echo $a " is bigger"
+echo $a " is bigger" 
+#If file one (a) will have more files it will be bigger.
 elif [ $d -gt $f ]
 then
 echo $b " is bigger"
+# If file second (b) will have more file it will be bigger then first (a)
 else
+# Is file number 1 and number 2 will have same size they will be equel
 echo "these files are equal"
 fi
 
