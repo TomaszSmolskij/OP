@@ -1,0 +1,17 @@
+#!/bin/bash
+echo  "Input the firstdir..."
+read a
+echo "Input the second dir..."
+read b
+    C1=$(find $a -type f | wc -l)
+    C2=$(find $b -type f | wc -l)
+    if [ $C1 -gt $C2 ]
+         then
+         echo "first Directory has more files"
+    else if [ $C2 -gt $C1 ]
+         then
+         echo "Second Directory has greater number of files"
+    else
+         echo "Both Directories have same number of files"
+    fi
+    fi
