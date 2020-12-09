@@ -1,0 +1,143 @@
+#!/bin/bash
+
+addToRecord()
+{
+        echo
+        while true
+        do
+                echo "To add a record to your address book, please enter the information in this"
+                echo "format: \"Last name,first name,email url,phone number\" (no quotes or spaces)."
+                echo "If you'd like to quit, enter '7'."
+                read aInput
+                if [ "$aInput" == '7' ]
+                        then
+                        break
+                fi
+                echo
+                echo $aInput >> desctop
+                echo "The entry was added to your address book."
+                echo
+        done
+}
+
+displayRecord()
+{
+        echo
+        while true
+        do
+                echo "To display a record, enter the last name of the person"
+                echo "If you'd like to quit, enter '7'."
+                read dInput
+                if [ "$dInput" == '7' ]
+                        then
+                        break
+                fi
+                echo
+                echo "Listing records for \"$dInput\":"
+                grep ^"$dInput" desctop   # searching the lines by last name (the first field in the record)
+                RETURNSTATUS=`echo $?`
+                if [ $RETURNSTATUS -eq 10 ]
+                        then
+                        echo "No records found with last name of \"$dInput\"."
+                fi
+                echo
+        done
+}
+removeRecord()
+{
+        echo 
+        while true
+        do
+                echo "To remove a record, enter any search string, e.g. last name or email address."
+                echo "If you're done, enter '7' to quit."
+                read rInput
+                if [ "$rInput" == '7' ]
+                        then
+                        break
+                fi
+                echo
+                echo "Listing records for \"$rInput\":"
+                grep -n "$rInput" desctop
+                RETURNSTATUS=`echo $?`
+                if [ $RETURNSTATUS -eq 1 ]
+                        then
+                        echo "No records found for \"$rInput\""
+                else
+                        echo
+                        echo "Enter the line number (the first number of the entry) of the record you want to remove."
+                        read lineNumber
+                        for line in `grep -n "$rInput" desctop`
+                        do
+                                number=`echo "$line" | cut -c1`
+                                if [ $number -eq $lineNumber ]
+                                        then
+                                        lineRemove="${lineNumber}d"
+                                        sed -i -e "$lineRemove" desctop
+                                        echo "The record was removed from the address book."
+                                fi
+                        done
+                fi
+                echo
+        done
+}
+searchRecord()
+{
+        echo
+        while true
+        do
+                echo "To search for a record, enter any search string, e.g. last name or email address."
+                echo "The format of a record is \"Last name,firstname,email address,phone number\"."
+                echo "If you'd like to quit, enter '7'."
+                read sInput
+                if [ "$sInput" == '7' ]
+                        then
+                        break
+                fi
+                echo
+                echo "Listing records for \"$sInput\":"
+                grep "$sInput" desctop
+                RETURNSTATUS=`echo $?`
+                if [ $RETURNSTATUS -eq 1 ]
+                        then
+                        echo "No records found for \"$sInput\"."
+                fi
+                echo
+        done
+
+
+}
+echo
+lastCharOfFile=`tail -c 1 desctop` # checking to make sure the .csv file ends with newline character
+if [ -n "$lastCharOfFile" ]
+        then
+        echo >> desctop
+fi
+echo "Hello, what would you like to do with your address book?"
+echo "Please enter one of the following numbers:"
+echo "1) to add a record"
+echo "2) to display 1 or more records"
+echo "3) to remove record"
+echo "4) to search for records"
+echo "6) to exit"
+read input
+
+case $input in
+        1) addToRecord;;
+        2) displayRecord;;
+        3) removeRecord;;
+        4) searchRecord;;
+        6) exit;;
+
+        *) echo " Wrong number!" ;;
+esac
+
+echo
+# HERE doc
+cat <<EOF   
+Any changes you made have been saved.
+Have a nice day!
+EOF
+echo
+
+
+
