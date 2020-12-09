@@ -8,6 +8,7 @@ addToRecord()
                 echo "To add a record to your address book, please enter the information in this"
                 echo "format: \"Last name,first name,email url,phone number\" (no quotes or spaces)."
                 echo "If you'd like to quit, enter '7'."
+                #Each record should be of the following construct: "Last name,first name,email address,phone number".
                 read aInput
                 if [ "$aInput" == '7' ]
                         then
@@ -27,6 +28,7 @@ displayRecord()
         do
                 echo "To display a record, enter the last name of the person"
                 echo "If you'd like to quit, enter '7'."
+                #Each record should be of the following construct: "Last name,first name,email address,phone number".
                 read dInput
                 if [ "$dInput" == '7' ]
                         then
@@ -50,6 +52,7 @@ removeRecord()
         do
                 echo "To remove a record, enter any search string, e.g. last name or email address."
                 echo "If you're done, enter '7' to quit."
+                #Each record should be of the following construct: "Last name,first name,email address,phone number".
                 read rInput
                 if [ "$rInput" == '7' ]
                         then
@@ -122,13 +125,18 @@ echo "6) to exit"
 read input
 
 case $input in
-        1) addToRecord;;
-        2) displayRecord;;
-        3) removeRecord;;
-        4) searchRecord;;
-        6) exit;;
+        1) addToRecord;;   #1) add - Input the data (Last name,first name,email address,phone number) - no spaces.
+        2) displayRecord;; #2 )display - User will input a name or names. The script will search the phone book and display records matching the 
+                               #last names of the request. If no record is found for the requested search an error message is to be printed. 
 
-        *) echo " Wrong number!" ;;
+        3) removeRecord;; #3) remove - Script will remove the record from the address book.
+e
+        4) searchRecord;; #4) search - The script will search for all records matching the search string input (as "grep" does). The difference 
+#between "display" and "search" is that "display" keys on names only. "Search" behaves in the same manner as grep in 
+#that the search string is not limited to names
+        6) exit;;  #6) exit program 
+
+        *) echo " Wrong number!" ;; #end with wrong numer
 esac
 
 echo
