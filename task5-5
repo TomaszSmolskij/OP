@@ -1,0 +1,13 @@
+#!/bin/bash
+echo "choose a directory"
+# Choose dir and file empty
+read ab
+# program will read this file
+echo "********************************* "
+for e in $(find $ab -empty -print)
+#Print empty files and dir
+do
+        stat $e
+        rm $e -d
+        # Delete empty files
+done
