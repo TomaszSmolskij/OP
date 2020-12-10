@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "choose any directory"
+# read your dir task5
+read ab
+#ab it si mean named file you can choose any other 
+find $ab -type f -perm 444
+# open dir with permission using only read -command.
+~                                                                                                                                                                                                          
+~                                                                                                                                                                                                          
+~                             
